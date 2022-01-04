@@ -1,26 +1,33 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { getQuestionsGroupedByStatus, getTotalScore } from './features/rejection/reducer';
+import React, { useEffect } from 'react';
+import { connect, useSelector, useDispatch } from 'react-redux';
 
+import { getQuestionsGroupedByStatus, getTotalScore } from './features/rejection/reducer';
+import { onHydrateLocalState } from './features/rejection/saga';
 import QuestionsPage from "./features/rejection/components/QuestionsPage/QuestionsPage";
 
 function App() {
 
-  const questions = useSelector(getQuestionsGroupedByStatus);
-  const totalScore = useSelector(getTotalScore);
+    const dispatch = useDispatch();
 
-  const scores = {
-    totalScore
-  };
+    const questions = useSelector(getQuestionsGroupedByStatus);
+    const totalScore = useSelector(getTotalScore);
 
-  return (
-    <div className="app">
-      <QuestionsPage
-        questions={questions}
-        scores={scores}
-      />
-    </div>
-  );
+    const scores = {
+        totalScore
+    };
+
+    useEffect(() => {
+        dispatch(onHydrateLocalState());
+    }, []);
+
+    return (
+        <div className="app">
+        <QuestionsPage
+            questions={questions}
+            scores={scores}
+        />
+        </div>
+    );
 }
 
-export default App;
+export default connect(null, { onHydrateLocalState })(App);
