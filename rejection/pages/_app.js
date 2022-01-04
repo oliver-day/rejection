@@ -1,5 +1,5 @@
 import React from "react";
-import { wrapper } from "../redux/store";
+import { wrapper } from "../store/store";
 
 import '../styles/globals.css'
 
