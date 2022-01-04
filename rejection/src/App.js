@@ -1,15 +1,26 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { getQuestionsGroupedByStatus, getTotalScore } from './features/rejection/reducer';
 
-import styles from '../styles/Home.module.css'
+import QuestionsPage from "./features/rejection/components/QuestionsPage/QuestionsPage";
 
 function App() {
-return (
-    <div className={styles.container}>
-        <div className="app">
-            Hello there Oliver!
-        </div>      
+
+  const questions = useSelector(getQuestionsGroupedByStatus);
+  const totalScore = useSelector(getTotalScore);
+
+  const scores = {
+    totalScore
+  };
+
+  return (
+    <div className="app">
+      <QuestionsPage
+        questions={questions}
+        scores={scores}
+      />
     </div>
-);
+  );
 }
-  
+
 export default App;
