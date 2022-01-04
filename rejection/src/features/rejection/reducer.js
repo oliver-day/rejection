@@ -25,6 +25,8 @@ hydrateQuestionsSucceeded.type = 'rejection/hydrateQuestionsSucceeded';
 
 const getQuestions = state => state[rejectionSlice].questions;
 
+const getIsLoading = state => state[rejectionSlice].isLoading;
+
 const getQuestionsGroupedByStatus = state => {
     const grouped = {};
 
@@ -99,6 +101,7 @@ export {
     hydrateQuestionsFromLocalState,
     hydrateQuestionsSucceeded,
     createQuestion,
+    getIsLoading,
     getQuestions,
     getQuestionsGroupedByStatus,
     getTotalScore
