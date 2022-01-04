@@ -1,16 +1,81 @@
-html,
 body {
-  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
+input {
+  display: block;
+  border: 1px solid #E0E0E0;
+  border-radius: 3px;
+  padding: 15px;
   box-sizing: border-box;
+  width: 30%;
+  margin-bottom: 10px;
+}
+
+.questions-page-title {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.new-question-form-title {
+  font-weight: bold;
+  margin: 10px 15px;
+}
+
+.new-question-form {
+  margin: 0 15px;
+}
+
+.new-question-form {
+  margin-bottom: 10px;
+}
+
+.questions-lists-main {
+  display: flex;
+  justify-content: space-between;
+}
+
+.questions-list {
+  width: 400px;
+  margin: 15px;
+}
+
+.questions-list-title {
+  font-weight: bold;
+}
+
+.question-card {
+  margin: 10px 0px;
+}
+
+.scoreboard {
+  color: #228b22;
+  margin: 10px 10px;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.button {
+  padding: 10px;
+  background: #228b22;
+  color: #fff;
+  border: 1px solid transparent;
+  borderRadius: 6px;
+  font: inherit;
+  cursor: pointer;
+}
+
+#unanswered-button {
+  background: #808080;
+}
+
+#accepted-button {
+  background: #0000cd;
 }
