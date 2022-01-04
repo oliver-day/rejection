@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect, useSelector, useDispatch } from 'react-redux';
 
-import { getQuestionsGroupedByStatus, getTotalScore } from './features/rejection/reducer';
-import { onHydrateLocalState } from './features/rejection/saga';
+import { hydrateQuestionsFromLocalState, getQuestionsGroupedByStatus, getTotalScore } from './features/rejection/reducer';
 import QuestionsPage from "./features/rejection/components/QuestionsPage/QuestionsPage";
 
 function App() {
@@ -16,9 +15,9 @@ function App() {
         totalScore
     };
 
-    useEffect(() => {
-        dispatch(onHydrateLocalState());
-    }, []);
+    // useEffect(() => {
+    //     dispatch(hydrateQuestionsFromLocalState());
+    // }, []);
 
     return (
         <div className="app">
@@ -30,4 +29,4 @@ function App() {
     );
 }
 
-export default connect(null, { onHydrateLocalState })(App);
+export default connect(null, { hydrateQuestionsFromLocalState })(App);

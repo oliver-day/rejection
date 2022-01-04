@@ -1,16 +1,18 @@
 import { all, call, put, select, takeEvery, takeLatest } from 'redux-saga/effects';
 
-import { hydrateQuestions, getQuestions, createQuestion } from './reducer';
+import { 
+    hydrateQuestionsFromLocalState,hydrateQuestionsSucceeded,
+    getQuestions,
+    createQuestion 
+} from './reducer';
 import { loadState, saveState } from '../../../store/localStorage';
 
 
-export const onHydrateLocalState = () => ({
-    type: 'rejection/saga/hydrateLocalState'
-});
+
 
 export function* hydrateLocalState() {
     const state = yield call(loadState);
-    yield put(hydrateQuestions(state));
+    yield put(hydrateQuestionsSucceeded(state));
 }
 
 export function* syncLocalState() {
@@ -19,7 +21,7 @@ export function* syncLocalState() {
 }
 
 function* watchHydrateLocalState() {
-    yield takeLatest(onHydrateLocalState().type, hydrateLocalState);
+    yield takeLatest(hydrateQuestionsFromLocalState().type, hydrateLocalState);
 };
 
 function* watchSyncLocalState() {

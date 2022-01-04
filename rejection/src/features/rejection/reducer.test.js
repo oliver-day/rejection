@@ -8,8 +8,12 @@ import {
     getQuestions,
     getTotalScore
  } from './reducer.js';
+import { createStore } from 'redux';
 
-const createState = () => [];
+const createState = () => ({
+    questions: [],
+    isLoading: false
+});
 const withSlice = state => ({ [rejectionSlice]: state });
 
 describe('rejection/reducer', async assert => {
@@ -70,7 +74,7 @@ describe('rejection/getTotalScore', async assert => {
         createQuestion(question3)
     ];
 
-    const state = withSlice(actions.reduce(rejectionReducer, []));
+    const state = withSlice(actions.reduce(rejectionReducer, createState()));
     
     assert({
         given: "one or more questions",
