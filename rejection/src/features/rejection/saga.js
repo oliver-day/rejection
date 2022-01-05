@@ -8,8 +8,6 @@ import {
 import { loadState, saveState } from '../../../store/localStorage';
 
 
-
-
 export function* hydrateLocalState() {
     const state = yield call(loadState);
     yield put(hydrateQuestionsSucceeded(state));
