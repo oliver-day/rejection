@@ -1,5 +1,5 @@
 import React from "react";
-import { wrapper } from "../store/store";
+import { withRedux } from "../store/store";
 
 import '../styles/globals.css'
 
@@ -7,4 +7,4 @@ function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />
 }
 
-export default wrapper.withRedux(MyApp);
+export default withRedux(MyApp);

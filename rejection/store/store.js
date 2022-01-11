@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { createWrapper } from "next-redux-wrapper"
+import { Provider } from 'react-redux';
 
 import rootReducer from './reducers';
 import rootSaga from './sagas';
@@ -10,13 +10,19 @@ const composeEnhancers = typeof window !== 'undefined' && window.__REDUX_DEVTOOL
 const sagaMiddleware = createSagaMiddleware();
 const middleware = [sagaMiddleware];
 
-const makeStore = () => {
-    const store = createStore(
-        rootReducer,
-        composeEnhancers(applyMiddleware(...middleware))
-    );
-    sagaMiddleware.run(rootSaga);
-    return store;
-};
+const store = createStore(
+    rootReducer,
+    composeEnhancers(applyMiddleware(...middleware))
+);
+sagaMiddleware.run(rootSaga);
 
-export const wrapper = createWrapper(makeStore);
+
+const withRedux = Component => {
+    return (
+        <Provider store={store}>
+            <Component />
+        </Provider>
+    );
+}
+
+export default withRedux;
