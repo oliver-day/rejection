@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { connect, useSelector, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 
 import { 
     hydrateQuestionsFromLocalState,
@@ -9,20 +9,20 @@ import {
 } from './features/rejection/reducer';
 import QuestionsPage from "./features/rejection/components/QuestionsPage/QuestionsPage";
 
-function App() {
+function App(props) {
 
-    const dispatch = useDispatch();
-
-    const isLoading = useSelector(getIsLoading);
-    const questions = useSelector(getQuestionsGroupedByStatus);
-    const totalScore = useSelector(getTotalScore);
+    const { 
+        hydrateQuestionsFromLocalState,
+        isLoading,
+        questions,
+        totalScore } = props;
 
     const scores = {
         totalScore
     };
 
     useEffect(() => {
-        dispatch(hydrateQuestionsFromLocalState());
+        hydrateQuestionsFromLocalState();
     }, []);
 
     return (
@@ -39,4 +39,12 @@ function App() {
     );
 }
 
-export default connect(null, { hydrateQuestionsFromLocalState })(App);
+const mapStateToProps = (state) => ({
+    isLoading: getIsLoading(state),
+    questions: getQuestionsGroupedByStatus(state),
+    totalScore: getTotalScore(state)
+});
+
+const mapDispatchToProps = { hydrateQuestionsFromLocalState };
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

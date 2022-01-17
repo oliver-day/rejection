@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 
 import { createQuestion } from '../../reducer';
 import ScoreBoard from '../ScoreBoard/ScoreBoard';
@@ -7,14 +7,15 @@ import QuestionForm from '../QuestionForm/QuestionForm';
 import QuestionsList from '../QuestionsList/QuestionsList';
 
 const QuestionsPage = (props) => {
-    const { questions, scores } = props;
+    const {
+        createQuestion,
+        questions,
+        scores } = props;
     const title = 'Rejection Portfolio Project';
 
-    const dispatch = useDispatch();
-
     const onCreateQuestion = ({ question, askee, status }) => {
-        dispatch(createQuestion({ question, askee, status }));
-      };
+        createQuestion({ question, askee, status });
+    };
 
     const renderQuestionsList = (questions = []) => {
         return Object.keys(questions).map(status => {
@@ -47,4 +48,8 @@ const QuestionsPage = (props) => {
     )
 };
 
-export default QuestionsPage;
+const mapDispatchToProps = {
+    createQuestion,
+};
+
+export default connect(null, mapDispatchToProps)(QuestionsPage);
