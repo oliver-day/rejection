@@ -10,19 +10,19 @@ const composeEnhancers = typeof window !== 'undefined' && window.__REDUX_DEVTOOL
 const sagaMiddleware = createSagaMiddleware();
 const middleware = [sagaMiddleware];
 
-const store = createStore(
+export const store = createStore(
     rootReducer,
     composeEnhancers(applyMiddleware(...middleware))
 );
 sagaMiddleware.run(rootSaga);
 
 
-const withRedux = Component => {
-    return (
-        <Provider store={store}>
-            <Component />
-        </Provider>
-    );
-}
-
-export default withRedux;
+export const withRedux = Component => {
+    return function withRedux (props) {
+        return (
+            <Provider store={store}>
+                <Component {...props}/>
+            </Provider>
+        );
+    }
+};
