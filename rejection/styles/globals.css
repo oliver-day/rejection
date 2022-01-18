@@ -79,3 +79,7 @@ input {
 #accepted-button {
   background: #0000cd;
 }
+
+#delete-button {
+  background: red;
+}

@@ -4,7 +4,8 @@ import {
     hydrateQuestionsFromLocalState,hydrateQuestionsSucceeded,
     getQuestions,
     createQuestion,
-    editQuestion
+    editQuestion,
+    deleteQuestion
 } from './reducer';
 import { loadState, saveState } from '../../../store/localStorage';
 
@@ -26,6 +27,7 @@ function* watchHydrateLocalState() {
 function* watchSyncLocalState() {
     yield takeEvery(createQuestion.type, syncLocalState);
     yield takeEvery(editQuestion.type, syncLocalState);
+    yield takeEvery(deleteQuestion.type, syncLocalState);
 }
 
 export default function* questionsSaga() {

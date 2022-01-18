@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { editQuestion, QUESTION_STATUSES } from '../../reducer';
+import { editQuestion, deleteQuestion, QUESTION_STATUSES } from '../../reducer';
 
 export const QuestionCard = (props) => {
-    const { editQuestion } = props;
+    const { editQuestion, deleteQuestion } = props;
     const {
         id,
         question,
@@ -15,6 +15,10 @@ export const QuestionCard = (props) => {
     const onQuestionStatusChange = (e) => {
         const editQuestionParams = Object.assign({}, props.question, { status: e.target.value });
         editQuestion(id, editQuestionParams);
+    }
+
+    const onDeleteButtonClick = (e) => {
+        deleteQuestion(id);
     }
 
     return (
@@ -59,11 +63,20 @@ export const QuestionCard = (props) => {
                 >
                     TIMESTAMP: {timestamp}
                 </div>
+                <div>
+                    <button
+                        id="delete-button"
+                        className="button"
+                        onClick={onDeleteButtonClick}
+                    >
+                        Delete
+                    </button>
+                </div>
             </div>
         </div>
     );
 };
 
-const mapDispatchToProps = { editQuestion };
+const mapDispatchToProps = { editQuestion, deleteQuestion };
 
 export default connect(null, mapDispatchToProps)(QuestionCard);
