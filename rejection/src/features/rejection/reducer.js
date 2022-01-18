@@ -36,6 +36,10 @@ const getQuestionsGroupedByStatus = state => {
     return grouped;
 };
 
+const getQuestionById = (state, id) => {
+    return state[rejectionSlice].questions.find(question => question.id === id);
+};
+
 const getTotalScore = (state) => state[rejectionSlice].questions.reduce((score, question) => 
     question.status === 'Accepted' ? score + 1 :
     question.status === 'Rejected' ? score + 10 :
@@ -56,14 +60,24 @@ const createQuestion = ({
             askee,
             status,
             id,
-            timestamp
+            timestamp,
         }
     }
 };
 createQuestion.type = 'rejection/createQuestion';
 
+const editQuestion = (id, params = {}) => {
+    return {
+        type: editQuestion.type,
+        payload: {
+            id,
+            params,
+        }
+    }
+};
+editQuestion.type = 'rejection/editQuestion';
 
-const rejectionReducer = (state = initialState, {type, payload} = {}) => {
+const rejectionReducer = (state = initialState, { type, payload } = {}) => {
     switch (type) {
         case hydrateQuestionsFromLocalState.type: {
             return {
@@ -89,6 +103,22 @@ const rejectionReducer = (state = initialState, {type, payload} = {}) => {
                 }
             );
         }
+        case editQuestion.type: {
+            const questions = getQuestions(state);
+            const updatedQuestions = questions.map(question => {
+                if (question.id === payload.id) {
+                    return payload.params;
+                }
+                return question;
+            });
+            return Object.assign(
+                {},
+                state,
+                {
+                    questions: updatedQuestions,
+                }
+            );
+        }
         default: {
             return state;
         }
@@ -101,8 +131,10 @@ export {
     hydrateQuestionsFromLocalState,
     hydrateQuestionsSucceeded,
     createQuestion,
+    editQuestion,
     getIsLoading,
     getQuestions,
     getQuestionsGroupedByStatus,
+    getQuestionById,
     getTotalScore
 }; 

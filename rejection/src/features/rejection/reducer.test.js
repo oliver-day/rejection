@@ -5,7 +5,9 @@ import {
     rejectionReducer,
     rejectionSlice,
     createQuestion,
+    editQuestion,
     getQuestions,
+    getQuestionById,
     getTotalScore
  } from './reducer.js';
 import { createStore } from 'redux';
@@ -46,6 +48,48 @@ describe('rejection/createQuestion', async assert => {
         actual: getQuestions(state),
         expected: [question]
     });
+});
+
+describe('rejection/editQuestion', async assert => {
+    const id = cuid();
+
+    const question1 = {
+        question: "May I have a raise?",
+        askee: "Boss",
+        status: "Rejected",
+    };
+
+    const question2 = {
+        id,
+        question: "Can you pay for my lunch today?",
+        askee: "Co-worker",
+        status: "Unanswered"
+    };
+
+    const question3 = {
+        question: "Can you pay for my lunch today?",
+        askee: "Boss",
+        status: "Accepted"
+    };
+    
+    const actions = [
+        createQuestion(question1),
+        createQuestion(question2),
+        createQuestion(question3)
+    ];
+
+    const state = withSlice(actions.reduce(rejectionReducer, createState()));
+    const newStatus = 'Rejected';
+    const questionToEdit = getQuestionById(state, id);
+    const editQuestionParams = Object.assign({}, questionToEdit, { status: newStatus });
+    const newState = withSlice(rejectionReducer(state, editQuestion(id, editQuestionParams)));
+
+    assert({
+        given: "id, status",
+        should: "edit question's status",
+        actual: getQuestionById(newState, id).status,
+        expected: editQuestionParams.status
+    })
 });
 
 describe('rejection/getTotalScore', async assert => {
