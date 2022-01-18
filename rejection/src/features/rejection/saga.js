@@ -3,7 +3,8 @@ import { all, call, put, select, takeEvery, takeLatest } from 'redux-saga/effect
 import { 
     hydrateQuestionsFromLocalState,hydrateQuestionsSucceeded,
     getQuestions,
-    createQuestion 
+    createQuestion,
+    editQuestion
 } from './reducer';
 import { loadState, saveState } from '../../../store/localStorage';
 
@@ -24,6 +25,7 @@ function* watchHydrateLocalState() {
 
 function* watchSyncLocalState() {
     yield takeEvery(createQuestion.type, syncLocalState);
+    yield takeEvery(editQuestion.type, syncLocalState);
 }
 
 export default function* questionsSaga() {

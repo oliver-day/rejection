@@ -82,7 +82,7 @@ describe('rejection/editQuestion', async assert => {
     const newStatus = 'Rejected';
     const questionToEdit = getQuestionById(state, id);
     const editQuestionParams = Object.assign({}, questionToEdit, { status: newStatus });
-    const newState = withSlice(rejectionReducer(state, editQuestion(id, editQuestionParams)));
+    const newState = withSlice(rejectionReducer(state[rejectionSlice], editQuestion(id, editQuestionParams)));
 
     assert({
         given: "id, status",

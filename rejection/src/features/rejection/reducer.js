@@ -104,8 +104,7 @@ const rejectionReducer = (state = initialState, { type, payload } = {}) => {
             );
         }
         case editQuestion.type: {
-            const questions = getQuestions(state);
-            const updatedQuestions = questions.map(question => {
+            const updatedQuestions = state.questions.map(question => {
                 if (question.id === payload.id) {
                     return payload.params;
                 }
@@ -128,6 +127,7 @@ const rejectionReducer = (state = initialState, { type, payload } = {}) => {
 export { 
     rejectionReducer,
     rejectionSlice,
+    QUESTION_STATUSES,
     hydrateQuestionsFromLocalState,
     hydrateQuestionsSucceeded,
     createQuestion,

@@ -48,8 +48,6 @@ const QuestionsPage = (props) => {
     )
 };
 
-const mapDispatchToProps = {
-    createQuestion,
-};
+const mapDispatchToProps = { createQuestion };
 
 export default connect(null, mapDispatchToProps)(QuestionsPage);

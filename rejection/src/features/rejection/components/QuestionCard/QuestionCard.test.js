@@ -3,7 +3,7 @@ import { describe } from 'riteway';
 import render from 'riteway/render-component';
 import match from 'riteway/match';
 
-import QuestionCard from './QuestionCard';
+import { QuestionCard } from './QuestionCard';
 
 describe('rejection/components/QuestionCard', async assert => {
     const createQuestionCard = (question) => render(<QuestionCard question={question} />);
@@ -28,8 +28,8 @@ describe('rejection/components/QuestionCard', async assert => {
         assert({
             given: '"question" prop',
             should: 'render the "status" prop',
-            actual: $('.question-card-status').html().trim(),
-            expected: `STATUS: ${question.status}`
+            actual: $('select option:selected').html().trim(),
+            expected: question.status
         });
 
         assert({
