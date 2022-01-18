@@ -77,6 +77,16 @@ const editQuestion = (id, params = {}) => {
 };
 editQuestion.type = 'rejection/editQuestion';
 
+const deleteQuestion = (id) => {
+    return {
+        type: deleteQuestion.type,
+        payload: {
+            id
+        }
+    }
+};
+deleteQuestion.type = 'rejection/deleteQuestion';
+
 const rejectionReducer = (state = initialState, { type, payload } = {}) => {
     switch (type) {
         case hydrateQuestionsFromLocalState.type: {
@@ -113,9 +123,15 @@ const rejectionReducer = (state = initialState, { type, payload } = {}) => {
             return Object.assign(
                 {},
                 state,
-                {
-                    questions: updatedQuestions,
-                }
+                { questions: updatedQuestions }
+            );
+        }
+        case deleteQuestion.type: {
+            const updatedQuestions = state.questions.filter(question => question.id !== payload.id);
+            return Object.assign(
+                {},
+                state,
+                { questions: updatedQuestions }
             );
         }
         default: {
@@ -132,6 +148,7 @@ export {
     hydrateQuestionsSucceeded,
     createQuestion,
     editQuestion,
+    deleteQuestion,
     getIsLoading,
     getQuestions,
     getQuestionsGroupedByStatus,

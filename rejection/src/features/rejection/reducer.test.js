@@ -6,6 +6,7 @@ import {
     rejectionSlice,
     createQuestion,
     editQuestion,
+    deleteQuestion,
     getQuestions,
     getQuestionById,
     getTotalScore
@@ -89,6 +90,46 @@ describe('rejection/editQuestion', async assert => {
         should: "edit question's status",
         actual: getQuestionById(newState, id).status,
         expected: editQuestionParams.status
+    })
+});
+
+describe('rejection/deleteQuestion', async assert => {
+    const id = cuid();
+
+    const question1 = {
+        question: "May I have a raise?",
+        askee: "Boss",
+        status: "Rejected",
+    };
+
+    const question2 = {
+        id,
+        question: "Can you pay for my lunch today?",
+        askee: "Co-worker",
+        status: "Unanswered"
+    };
+
+    const question3 = {
+        question: "Can you pay for my lunch today?",
+        askee: "Boss",
+        status: "Accepted"
+    };
+    
+    const actions = [
+        createQuestion(question1),
+        createQuestion(question2),
+        createQuestion(question3)
+    ];
+
+    const state = withSlice(actions.reduce(rejectionReducer, createState()));
+    const newState = withSlice(rejectionReducer(state[rejectionSlice], deleteQuestion(id)));
+    
+
+    assert({
+        given: "id",
+        should: "delete question with id from state",
+        actual: getQuestionById(newState, id),
+        expected: undefined
     })
 });
 
