@@ -1,7 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
-import { editQuestion, deleteQuestion, QUESTION_STATUSES } from '../../reducer';
+import { QUESTION_STATUSES } from '../../reducer';
 
 export const QuestionCard = (props) => {
     const { editQuestion, deleteQuestion } = props;
@@ -77,6 +76,4 @@ export const QuestionCard = (props) => {
     );
 };
 
-const mapDispatchToProps = { editQuestion, deleteQuestion };
-
-export default connect(null, mapDispatchToProps)(QuestionCard);
+export default QuestionCard;

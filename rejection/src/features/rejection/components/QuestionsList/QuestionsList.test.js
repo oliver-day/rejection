@@ -1,15 +1,25 @@
 import React from 'react';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import { describe } from 'riteway';
 import render from 'riteway/render-component';
 import match from 'riteway/match';
 
+import { rejectionReducer } from '../../reducer';
 import QuestionsList from './QuestionsList';
 
 describe('rejection/components/QuestionsList', async assert => {
-    const createQuestionsList = (questions, status) => render(<QuestionsList
-        questions={questions}
-        status={status}
-    />);
+    const createQuestionsList = (questions, status) => {
+        const store = createStore(rejectionReducer);
+        return render(
+            <Provider store={store}>
+                <QuestionsList
+                    questions={questions}
+                    status={status}
+                />
+            </Provider>
+        );
+    } 
 
     {
         const questions = [
