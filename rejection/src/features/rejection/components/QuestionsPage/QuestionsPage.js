@@ -10,7 +10,9 @@ const QuestionsPage = (props) => {
     const {
         createQuestion,
         questions,
-        scores } = props;
+        scores,
+        randomQuote,
+     } = props;
     const title = 'Rejection Portfolio Project';
 
     const onCreateQuestion = ({ question, askee, status }) => {
@@ -32,9 +34,8 @@ const QuestionsPage = (props) => {
 
     return (
         <div className='questions-page'>
-            <div className='questions-page-title'>
-                {title}
-            </div>
+            <div className='questions-page-title'>{title}</div>
+            <div className='questions-page-quote'>{randomQuote}</div>
             <ScoreBoard totalScore={scores.totalScore} />
             <br />
             <QuestionForm

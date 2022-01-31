@@ -15,7 +15,9 @@ function App(props) {
         hydrateQuestionsFromLocalState,
         isLoading,
         questions,
-        totalScore } = props;
+        totalScore,
+        randomQuote,
+     } = props;
 
     const scores = {
         totalScore
@@ -33,6 +35,7 @@ function App(props) {
                 <QuestionsPage
                     questions={questions}
                     scores={scores}
+                    randomQuote={randomQuote}
                 />
             }
         </div>
@@ -42,7 +45,7 @@ function App(props) {
 const mapStateToProps = (state) => ({
     isLoading: getIsLoading(state),
     questions: getQuestionsGroupedByStatus(state),
-    totalScore: getTotalScore(state)
+    totalScore: getTotalScore(state),
 });
 
 const mapDispatchToProps = { hydrateQuestionsFromLocalState };
