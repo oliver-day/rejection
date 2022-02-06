@@ -7,6 +7,7 @@ import {
     getQuestionsGroupedByStatus,
     getTotalScore
 } from './features/rejection/reducer';
+import { hydrateRandomQuote, getRandomQuote } from './features/quote/reducer';
 import QuestionsPage from "./features/rejection/components/QuestionsPage/QuestionsPage";
 
 function App(props) {
@@ -16,6 +17,7 @@ function App(props) {
         isLoading,
         questions,
         totalScore,
+        hydrateRandomQuote,
         randomQuote,
      } = props;
 
@@ -25,6 +27,10 @@ function App(props) {
 
     useEffect(() => {
         hydrateQuestionsFromLocalState();
+    }, []);
+
+    useEffect(() => {
+        hydrateRandomQuote();
     }, []);
 
     return (
@@ -46,8 +52,12 @@ const mapStateToProps = (state) => ({
     isLoading: getIsLoading(state),
     questions: getQuestionsGroupedByStatus(state),
     totalScore: getTotalScore(state),
+    randomQuote: getRandomQuote(state),
 });
 
-const mapDispatchToProps = { hydrateQuestionsFromLocalState };
+const mapDispatchToProps = {
+    hydrateQuestionsFromLocalState,
+    hydrateRandomQuote,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

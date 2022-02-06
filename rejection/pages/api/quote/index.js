@@ -15,7 +15,7 @@ const quotes = [
 ];
 
 const handler = nc()
-    .get((req, res) => {
+    .get((_, res) => {
         res.json({ data: quotes });
     })
 

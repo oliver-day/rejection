@@ -2,19 +2,8 @@ import React from 'react';
 
 import App from '../src/App';
 
-export default function Index(props) {
+export default function Index() {
   return (
-    <App randomQuote={props.randomQuote} />
+    <App />
   )
-}
-
-export async function getServerSideProps() {
-  const res = await fetch(`${process.env.API_URL}/api/quote/`);
-  const {data: quotes} = await res.json();
-  
-  const randomQuote = quotes[Math.floor(Math.random()*quotes.length)];
-
-  return {
-    props: { randomQuote }
-  }
 }

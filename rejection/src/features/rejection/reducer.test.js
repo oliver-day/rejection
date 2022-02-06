@@ -11,7 +11,6 @@ import {
     getQuestionById,
     getTotalScore
  } from './reducer.js';
-import { createStore } from 'redux';
 
 const createState = () => ({
     questions: [],
