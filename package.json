@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@paralleldrive/feature-toggles": "^1.0.4",
+    "@paralleldrive/react-feature-toggles": "^2.3.1"
+  }
+}
