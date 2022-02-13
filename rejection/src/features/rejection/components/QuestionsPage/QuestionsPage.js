@@ -5,6 +5,7 @@ import { createQuestion } from '../../reducer';
 import ScoreBoard from '../ScoreBoard/ScoreBoard';
 import QuestionForm from '../QuestionForm/QuestionForm';
 import QuestionsList from '../QuestionsList/QuestionsList';
+import RandomQuote from '../../../quote/components/RandomQuote';
 
 const QuestionsPage = (props) => {
     const {
@@ -35,7 +36,7 @@ const QuestionsPage = (props) => {
     return (
         <div className='questions-page'>
             <div className='questions-page-title'>{title}</div>
-            <div className='questions-page-quote'>{randomQuote}</div>
+            <RandomQuote randomQuote={randomQuote} />
             <ScoreBoard totalScore={scores.totalScore} />
             <br />
             <QuestionForm
